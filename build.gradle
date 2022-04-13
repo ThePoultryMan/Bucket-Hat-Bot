@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+group 'io.github.thepoultryman.buckethat'
+mainClassName = 'io.github.thepoultryman.buckethat.BucketHat'
+version '0.0.1-alpha.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("net.dv8tion:JDA:${jda_version}")
+    implementation("ch.qos.logback:logback-classic:1.2.8")
+}

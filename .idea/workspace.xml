@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd2e8e97-90e5-40f4-aced-2b3dabe69fc3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsonSchemas.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="dd2e8e97-90e5-40f4-aced-2b3dabe69fc3" name="Changes" comment="gradle stuff">
       <change afterPath="$PROJECT_DIR$/intellij/json/schema/bh-bc.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/io/github/thepoultryman/buckethat/BucketHatGuildStarter.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/io/github/thepoultryman/buckethat/command/guild/CommandListener.java" afterDir="false" />
@@ -15,14 +13,10 @@
       <change afterPath="$PROJECT_DIR$/src/main/java/io/github/thepoultryman/buckethat/command/guild/GuildCommandReader.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/io/github/thepoultryman/buckethat/command/guild/json/BasicCommandJson.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/io/github/thepoultryman/buckethat/command/guild/json/EmbedCommandJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/thepoultryman/buckethat/BucketHat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/thepoultryman/buckethat/BucketHat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +85,7 @@
       <recent name="D:\repos\personal\github\Bucket-Hat-Bot\build\libs\data\guild" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\repos\personal\github\Bucket-Hat-Bot" />
       <recent name="D:\repos\personal\github\Bucket-Hat-Bot\build\libs\data\guild\embeds" />
     </key>
   </component>
@@ -100,13 +95,8 @@
       <command value="gradle build" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.Bucket-Hat-Bot [build]">
-    <configuration name="Build and Run" type="CompoundRunConfigurationType">
-      <toRun name="Bucket-Hat-Bot [build]" type="GradleRunConfiguration" />
-      <toRun name="Bucket-Hat-Bot-0.0.1-alpha.1-all.jar" type="JarApplication" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Bucket-Hat-Bot [build]" type="GradleRunConfiguration" factoryName="Gradle">
+  <component name="RunManager" selected="Gradle.Run">
+    <configuration name="Build" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -124,10 +114,22 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <EXTENSION ID="com.intellij.execution.ExternalSystemRunConfigurationJavaExtension">
+        <extension name="net.ashald.envfile">
+          <option name="IS_ENABLED" value="false" />
+          <option name="IS_SUBST" value="false" />
+          <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+          <option name="IS_IGNORE_MISSING_FILES" value="false" />
+          <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+          <ENTRIES>
+            <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+          </ENTRIES>
+        </extension>
+      </EXTENSION>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="Bucket-Hat-Bot [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Run" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -145,24 +147,25 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <EXTENSION ID="com.intellij.execution.ExternalSystemRunConfigurationJavaExtension">
+        <extension name="net.ashald.envfile">
+          <option name="IS_ENABLED" value="false" />
+          <option name="IS_SUBST" value="false" />
+          <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+          <option name="IS_IGNORE_MISSING_FILES" value="false" />
+          <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+          <ENTRIES>
+            <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+          </ENTRIES>
+        </extension>
+      </EXTENSION>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="Bucket-Hat-Bot-0.0.1-alpha.1-all.jar" type="JarApplication">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/build/libs/Bucket-Hat-Bot-0.0.1-alpha.1-all.jar" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Compound.Build and Run" />
-      <item itemvalue="Gradle.Bucket-Hat-Bot [build]" />
-      <item itemvalue="Gradle.Bucket-Hat-Bot [run]" />
-      <item itemvalue="JAR Application.Bucket-Hat-Bot-0.0.1-alpha.1-all.jar" />
+      <item itemvalue="Gradle.Run" />
+      <item itemvalue="Gradle.Build" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.Bucket-Hat-Bot [run]" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -173,6 +176,21 @@
       <option name="presentableId" value="Default" />
       <updated>1649985084499</updated>
     </task>
+    <task id="LOCAL-00001" summary="intellijank">
+      <created>1650080384098</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1650080384098</updated>
+    </task>
+    <task id="LOCAL-00002" summary="gradle stuff">
+      <created>1650080580925</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1650080580925</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,6 +205,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="intellijank" />
+    <MESSAGE value="gradle stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="gradle stuff" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">

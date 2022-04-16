@@ -37,6 +37,15 @@ public class GuildCommandHelper {
         basicEmbedCommandMap.put(commandName, commandJson);
     }
 
+    /**
+     * Will create a {@link MessageEmbed} that has one field with the
+     * value specified by the JSON 'response' field. There will be a
+     * footer on the embed as well that reads 'Bucket Hat'
+     * @param commandName The name of the basic embed command that will
+     *                    be used as the key for the {@code basicEmbedCommandMap}.
+     * @return A {@link MessageEmbed} that contains a single field and
+     * a footer.
+     */
     public static MessageEmbed getBasicEmbedCommandResponse(String commandName) {
         BasicCommandJson commandJson = basicEmbedCommandMap.get(commandName);
 
@@ -57,6 +66,18 @@ public class GuildCommandHelper {
         embedCommandMap.put(commandName, commandJson);
     }
 
+    /**
+     * <p>Generates, and returns, a {@link MessageEmbed} based on the JSON
+     * file used. The tile of the embed will be set based on the 'title'
+     * field in the JSON file. The 'fields' list will be iterated
+     * through creating a new field on the {@link MessageEmbed} on
+     * each iteration.</p>
+     *
+     * @param commandName The name of the command that will be used as
+     *                    the key for the {@code embedCommandMap}.
+     * @return A {@link MessageEmbed} with the added fields and the
+     * other information from the JSON file.
+     */
     public static MessageEmbed getEmbedCommandResponse(String commandName) {
         EmbedCommandJson commandJson = embedCommandMap.get(commandName);
         EmbedBuilder builder = new EmbedBuilder().setTitle(commandJson.getTitle());

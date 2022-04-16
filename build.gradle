@@ -16,5 +16,5 @@ dependencies {
     implementation("net.dv8tion:JDA:${jda_version}")
     implementation("ch.qos.logback:logback-classic:${logback_classic_version}")
     implementation("com.google.code.gson:gson:${gson_version}")
-    implementation("io.github.cdimascio:dotenv:${dotenv_version}")
+    implementation("io.github.cdimascio:dotenv-java:${dotenv_version}")
 }

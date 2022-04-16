@@ -1,0 +1,39 @@
+{
+    "required": [ "type", "name", "description", "response" ],
+    "properties": {
+        "type": {
+            "type": "string",
+            "description": "The type of command. Should be 'basic' or 'basic-embed'",
+            "oneOf": [
+                {
+                    "enum": [
+                        "basic"
+                    ],
+                    "description": "A standard discord message response without any special properties."
+                },
+                {
+                    "enum": [
+                        "basic-embed"
+                    ],
+                    "description": "A simple message in the form of an embed."
+                }
+            ]
+        },
+        "name": {
+            "type": "string",
+            "description": "The name of the command that will be created for your guild. Should be lowercase and use dashes instead of spaces."
+        },
+        "description": {
+            "type": "string",
+            "description": "The description of the command that users will see as they go to use the command."
+        },
+        "response": {
+            "type": "string",
+            "description": "The response that the bot will use when the command is given."
+        },
+        "title": {
+            "type": "string",
+            "description": "The title of the embed. Won't, and should not, be used when creating a 'basic' command. Only used when creating a 'basic-embed' command."
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "mods",
+    "description": "List the Minecraft mods that ThePoultryMan has made.",
+    "title": "ThePoultryMan's Mods",
+    "fields": [
+        {
+            "header": "Crops Love Rain",
+            "body": "Speeds up the growth rate of crops, and saplings, when it's raining."
+        },
+        {
+            "header": "Pleasant Pigeons",
+            "body": "Adds cute and friendly pigeons to Minecraft that can be tamed by the player."
+        },
+        {
+            "header": "Lanterns Belong on Walls",
+            "body": "Allows the player to place lanterns on walls."
+        }
+    ]
+}

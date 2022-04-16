@@ -63,7 +63,7 @@ public class GuildCommandHelper {
 
         for (int i = 0; i < commandJson.getFields().size(); ++i) {
             EmbedCommandJson.EmbedField embedField = commandJson.getFields().get(i);
-            builder.addField(embedField.getHeader(), embedField.getBody(), false);
+            builder.addField(embedField.getHeader(), embedField.getBody(), false); // TODO: Set inline based on JSON file.
         }
 
         return builder.build();

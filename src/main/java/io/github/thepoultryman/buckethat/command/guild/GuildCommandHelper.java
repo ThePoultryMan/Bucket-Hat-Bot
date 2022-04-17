@@ -49,9 +49,8 @@ public class GuildCommandHelper {
     public static MessageEmbed getBasicEmbedCommandResponse(String commandName) {
         BasicCommandJson commandJson = basicEmbedCommandMap.get(commandName);
 
-        return new EmbedBuilder().setTitle(commandJson.getTitle())
-                .addField("", commandJson.getResponse(), false)
-                .setFooter("Bucket Hat").build();
+        return new EmbedBuilder().setTitle(commandJson.getTitle()).setColor(commandJson.getColor())
+                .setDescription(commandJson.getResponse()).build();
     }
 
     public static boolean isBasicEmbedCommand(String commandName) {

@@ -3,5 +3,6 @@
     "name": "ping",
     "description": "Returns the bot's active ping",
     "response": "Your ping is: ",
-    "title": "Pong!"
+    "title": "Pong!",
+    "color": "yellow"
 }

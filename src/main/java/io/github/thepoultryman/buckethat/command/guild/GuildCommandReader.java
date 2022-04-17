@@ -2,22 +2,18 @@ package io.github.thepoultryman.buckethat.command.guild;
 
 import com.google.gson.Gson;
 import io.github.thepoultryman.buckethat.BucketHat;
+import io.github.thepoultryman.buckethat.command.CommandHelper;
 import io.github.thepoultryman.buckethat.command.guild.json.BasicCommandJson;
 import io.github.thepoultryman.buckethat.command.guild.json.EmbedCommandJson;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
-import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import org.slf4j.Logger;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.Objects;
 
 public class GuildCommandReader {
     private static final Logger BH_LOGGER = BucketHat.LOGGER;
     private final String rootDir;
-
-    private final Collection<SlashCommandData> commandCollection = new HashSet<>();
 
     public GuildCommandReader(String rootDir) {
         this.rootDir = rootDir;
@@ -69,7 +65,7 @@ public class GuildCommandReader {
             BH_LOGGER.warn("Guild Command Directory Does Not Exist: Create the directory now according to the spec." +
                     "\nWill return a single ping command.");
 
-            this.commandCollection.add(Commands.slash("ping", "Returns the ping to the user."));
+            CommandHelper.addCommandData(Commands.slash("ping", "Returns the ping to the user."));
             GuildCommandHelper.addBasicCommand("ping", "Your current ping is: IDK, lol." +
                     "\nIf you see this it means something went wrong.");
         }
@@ -104,10 +100,6 @@ public class GuildCommandReader {
     }
 
     private void addBasicCommand(String name, String description) {
-        this.commandCollection.add(Commands.slash(name, description));
-    }
-
-    public Collection<SlashCommandData> getCommandCollection() {
-        return this.commandCollection;
+        CommandHelper.addCommandData(Commands.slash(name, description));
     }
 }

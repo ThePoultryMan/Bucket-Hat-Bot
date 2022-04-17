@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandListener extends ListenerAdapter {
+public class GuildCommandListener extends ListenerAdapter {
 
     /**
      * <p>When a slash command is made this method will be run. Using

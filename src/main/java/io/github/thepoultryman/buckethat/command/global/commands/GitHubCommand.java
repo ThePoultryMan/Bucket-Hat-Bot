@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHRepository;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class GitHubCommand extends GlobalCommand {
@@ -23,11 +24,13 @@ public class GitHubCommand extends GlobalCommand {
     public MessageEmbed getEmbedResponse(String repository, Integer issue, String requestingName) {
         EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("GitHub");
 
-        if (repository == null && issue == null) {
-            embedBuilder = this.getRepositoryStatsEmbed("ThePoultryMan/Bucket-Hat-Bot", requestingName);
-        } else if (repository != null && issue != null && issue <= 0) {
+        if (issue != null && issue <= 0) {
             embedBuilder.setTitle("silly g00se")
-                    .setDescription("1. There cannot be issues with a issue 0 or lower.\n2. This means that Bucket-Hat-Bot cannot have an issue " + issue);
+                    .setDescription("1. There cannot be issues with a issue 0 or lower." +
+                            "\n2. This means that Bucket-Hat-Bot cannot have an issue " + issue)
+                    .setColor(new Color(0x850303));
+        } else if (repository == null && issue == null) {
+            embedBuilder = this.getRepositoryStatsEmbed("ThePoultryMan/Bucket-Hat-Bot", requestingName);
         } else if (repository != null && issue == null) {
             GHRepository ghRepository = BucketHat.gitHub.getRepository(repository);
             if (ghRepository != null) {
@@ -40,6 +43,7 @@ public class GitHubCommand extends GlobalCommand {
         } else if (issue >= 1) {
             embedBuilder = this.getEmbedIssueResponse("ThePoultryMan/Bucket-Hat-Bot", issue);
         }
+
 
         return embedBuilder.build();
     }

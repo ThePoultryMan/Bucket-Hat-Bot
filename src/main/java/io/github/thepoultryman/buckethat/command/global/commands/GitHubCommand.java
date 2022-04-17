@@ -25,10 +25,9 @@ public class GitHubCommand extends GlobalCommand {
         EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("GitHub");
 
         if (issue != null && issue <= 0) {
-            embedBuilder.setTitle("silly g00se")
+            embedBuilder.setTitle("silly g00se").setColor(new Color(0x850303))
                     .setDescription("1. There cannot be issues with a issue 0 or lower." +
-                            "\n2. This means that Bucket-Hat-Bot cannot have an issue " + issue)
-                    .setColor(new Color(0x850303));
+                            "\n2. This means that Bucket-Hat-Bot cannot have an issue " + issue);
         } else if (repository == null && issue == null) {
             embedBuilder = this.getRepositoryStatsEmbed("ThePoultryMan/Bucket-Hat-Bot", requestingName);
         } else if (repository != null && issue == null) {
@@ -51,7 +50,7 @@ public class GitHubCommand extends GlobalCommand {
     private EmbedBuilder getRepositoryStatsEmbed(String repository, String requestingName) {
         GitHubIntegration gitHub = BucketHat.gitHub;
 
-        return new EmbedBuilder().setTitle(gitHub.getRepository(repository).getName())
+        return new EmbedBuilder().setTitle(gitHub.getRepository(repository).getName()).setColor(new Color(0x077EE0))
                 .setDescription("*Owned by " + gitHub.getRepositoryOwner(repository).getLogin() + "*")
                 .addField("Issues (Open)", gitHub.getOpenIssueCount(repository).toString(), false)
                 .addField("Stars", gitHub.getStarCount(repository).toString(), false)
@@ -75,12 +74,12 @@ public class GitHubCommand extends GlobalCommand {
                 GHIssue ghIssue = ghRepository.getIssue(issue);
 
                 if (ghIssue.getBody().length() <= 1024) {
-                    embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).addField(ghIssue.getTitle(),
-                            ghIssue.getBody(), false);
+                    embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).setColor(new Color(0xD38309))
+                            .addField(ghIssue.getTitle(), ghIssue.getBody(), false);
                 } else {
                     String link = "...\n[[Read More]](" + ghIssue.getHtmlUrl() + ")";
-                    embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).addField(ghIssue.getTitle(),
-                            ghIssue.getBody().substring(0, 1024 - link.length()) + link, false);
+                    embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).setColor(new Color(0xD38309))
+                            .addField(ghIssue.getTitle(), ghIssue.getBody().substring(0, 1024 - link.length()) + link, false);
                 }
             } catch (IOException e) {
                 return this.getNoIssueFoundEmbed(repository, issue);
@@ -93,7 +92,7 @@ public class GitHubCommand extends GlobalCommand {
     }
 
     private EmbedBuilder getNoIssueFoundEmbed(String repository, Integer issue) {
-        return new EmbedBuilder().setTitle("#" + issue + " not found in " + repository)
+        return new EmbedBuilder().setTitle("#" + issue + " not found in " + repository).setColor(new Color(0xC93508))
                 .setDescription("Issue #" + issue + " could not be found in " + repository + ". This usually means that there is no" +
                         " issue #" + issue + ".");
     }

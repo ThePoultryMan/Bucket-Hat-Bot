@@ -66,7 +66,7 @@ public class GitHubIntegration {
 
     public Integer getWatcherCount(String repository) {
         try {
-            return github.getRepository(repository).getWatchersCount();
+            return github.getRepository(repository).getSubscribersCount();
         } catch (IOException e) {
             return 0;
         }

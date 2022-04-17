@@ -7,12 +7,7 @@
 
 name: build
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+on: [pull_request, push]
 permissions:
   contents: read
 

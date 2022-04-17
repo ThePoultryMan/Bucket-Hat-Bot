@@ -1,5 +1,6 @@
 package io.github.thepoultryman.buckethat;
 
+import io.github.thepoultryman.buckethat.command.CommandHelper;
 import io.github.thepoultryman.buckethat.command.guild.GuildCommandManager;
 import io.github.thepoultryman.buckethat.command.guild.GuildCommandReader;
 import net.dv8tion.jda.api.events.ReadyEvent;
@@ -16,8 +17,10 @@ public class BucketHatGuildStarter extends ListenerAdapter {
 
             commandReader.readBasicCommands();
             commandReader.readEmbedCommands();
+            CommandHelper.setGuildCommandsReady(true);
 
-            commandCreator.addAllCommands(commandReader.getCommandCollection());
+            if (CommandHelper.areCommandsReady())
+                commandCreator.addAllCommands(CommandHelper.getCommandCollection());
         } else {
             BucketHat.LOGGER.warn("[Substantial Error]: It appears that the specified GuildId doesn't match with an existing guild.");
         }

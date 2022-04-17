@@ -10,6 +10,7 @@ import org.kohsuke.github.GHRepository;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 
 public class GitHubCommand extends GlobalCommand {
     public GitHubCommand(String name, String description) {
@@ -37,10 +38,8 @@ public class GitHubCommand extends GlobalCommand {
             } else {
                 embedBuilder.setTitle("~~oops, something went wrong~~ Invalid Repository").setDescription(this.getRepositoryFormatDesc());
             }
-        } else if (repository != null) {
-            embedBuilder = this.getEmbedIssueResponse(repository, issue);
-        } else if (issue >= 1) {
-            embedBuilder = this.getEmbedIssueResponse("ThePoultryMan/Bucket-Hat-Bot", issue);
+        } else {
+            embedBuilder = this.getEmbedIssueResponse(Objects.requireNonNullElse(repository, "ThePoultryMan/Bucket-Hat-Bot"), issue);
         }
 
 

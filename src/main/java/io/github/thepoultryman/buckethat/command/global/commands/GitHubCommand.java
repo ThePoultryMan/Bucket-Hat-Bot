@@ -1,6 +1,7 @@
 package io.github.thepoultryman.buckethat.command.global.commands;
 
 import io.github.thepoultryman.buckethat.BucketHat;
+import io.github.thepoultryman.buckethat.GitHubIntegration;
 import io.github.thepoultryman.buckethat.command.global.GlobalCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
@@ -19,19 +20,18 @@ public class GitHubCommand extends GlobalCommand {
         return true;
     }
 
-    public MessageEmbed getEmbedResponse(String repository, Integer issue) {
+    public MessageEmbed getEmbedResponse(String repository, Integer issue, String requestingName) {
         EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("GitHub");
 
         if (repository == null && issue == null) {
-            embedBuilder.setTitle("Bucket Hat Bot")
-                    .addField("Issues (Open)", BucketHat.gitHub.getOpenIssueCount("ThePoultryMan/Bucket-Hat-Bot").toString(), false);
+            embedBuilder = this.getRepositoryStatsEmbed("ThePoultryMan/Bucket-Hat-Bot", requestingName);
         } else if (repository != null && issue != null && issue <= 0) {
             embedBuilder.setTitle("silly g00se")
                     .setDescription("1. There cannot be issues with a issue 0 or lower.\n2. This means that Bucket-Hat-Bot cannot have an issue " + issue);
         } else if (repository != null && issue == null) {
             GHRepository ghRepository = BucketHat.gitHub.getRepository(repository);
             if (ghRepository != null) {
-                embedBuilder.setTitle(ghRepository.getName()); // TODO: Finish logic (Repository Stats)
+                embedBuilder = this.getRepositoryStatsEmbed(repository, requestingName);
             } else {
                 embedBuilder.setTitle("~~oops, something went wrong~~ Invalid Repository").setDescription(this.getRepositoryFormatDesc());
             }
@@ -42,6 +42,17 @@ public class GitHubCommand extends GlobalCommand {
         }
 
         return embedBuilder.build();
+    }
+
+    private EmbedBuilder getRepositoryStatsEmbed(String repository, String requestingName) {
+        GitHubIntegration gitHub = BucketHat.gitHub;
+
+        return new EmbedBuilder().setTitle(gitHub.getRepository(repository).getName())
+                .setDescription("*Owned by " + gitHub.getRepositoryOwner(repository).getLogin() + "*")
+                .addField("Issues (Open)", gitHub.getOpenIssueCount(repository).toString(), false)
+                .addField("Stars", gitHub.getStarCount(repository).toString(), false)
+                .addField("Watchers", gitHub.getWatcherCount(repository).toString(), false)
+                .setFooter("Requested by " + requestingName);
     }
 
     private String getRepositoryFormatDesc() {

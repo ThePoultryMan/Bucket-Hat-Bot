@@ -1,9 +1,6 @@
 package io.github.thepoultryman.buckethat;
 
-import org.kohsuke.github.GHIssue;
-import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GitHub;
-import org.kohsuke.github.GitHubBuilder;
+import org.kohsuke.github.*;
 
 import java.io.IOException;
 
@@ -22,6 +19,14 @@ public class GitHubIntegration {
 
         try {
             return github.getRepository(name);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public GHUser getRepositoryOwner(String repository) {
+        try {
+            return github.getRepository(repository).getOwner();
         } catch (IOException e) {
             return null;
         }
@@ -46,6 +51,22 @@ public class GitHubIntegration {
     public Integer getOpenIssueCount(String repository) {
         try {
             return github.getRepository(repository).getOpenIssueCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    public Integer getStarCount(String repository) {
+        try {
+            return github.getRepository(repository).getStargazersCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    public Integer getWatcherCount(String repository) {
+        try {
+            return github.getRepository(repository).getWatchersCount();
         } catch (IOException e) {
             return 0;
         }

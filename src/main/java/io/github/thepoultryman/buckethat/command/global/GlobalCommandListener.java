@@ -18,7 +18,7 @@ public class GlobalCommandListener extends ListenerAdapter {
                 issueNumber = event.getOption("issue").getAsInt();
 
             if (GlobalCommandHelper.getCommand(commandName) instanceof GitHubCommand gitHubCommand)
-                event.replyEmbeds(gitHubCommand.getEmbedResponse(repository, issueNumber)).queue();
+                event.replyEmbeds(gitHubCommand.getEmbedResponse(repository, issueNumber, event.getUser().getName())).queue();
         }
     }
 }

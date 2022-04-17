@@ -4,7 +4,10 @@ import io.github.thepoultryman.buckethat.BucketHat;
 import io.github.thepoultryman.buckethat.command.global.GlobalCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHRepository;
+
+import java.io.IOException;
 
 public class GitHubCommand extends GlobalCommand {
     public GitHubCommand(String name, String description) {
@@ -28,17 +31,41 @@ public class GitHubCommand extends GlobalCommand {
         } else if (repository != null && issue == null) {
             GHRepository ghRepository = BucketHat.gitHub.getRepository(repository);
             if (ghRepository != null) {
-                embedBuilder.setTitle(ghRepository.getName());
+                embedBuilder.setTitle(ghRepository.getName()); // TODO: Finish logic (Repository Stats)
             } else {
-                embedBuilder.setTitle("~~oops, something went wrong~~ Invalid Repository")
-                        .setDescription("""
-                                 The repository needs to be in the User/Repository format, or the Organization/Repository format.
-                                **Look at these examples:**
-                                - ThePoultryMan/Crops-Love-Rain
-                                - IrisShaders/Iris""");
+                embedBuilder.setTitle("~~oops, something went wrong~~ Invalid Repository").setDescription(this.getRepositoryFormatDesc());
             }
+        } else if (repository != null) {
+            GHRepository ghRepository = BucketHat.gitHub.getRepository(repository);
+            if (ghRepository != null) {
+                try {
+                    GHIssue ghIssue = ghRepository.getIssue(issue);
+
+                    if (ghIssue.getBody().length() <= 1024) {
+                        embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).addField(ghIssue.getTitle(),
+                                ghIssue.getBody(), false);
+                    } else {
+                        String link = "...\n[[Read More]](" + ghIssue.getHtmlUrl() + ")";
+                        embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).addField(ghIssue.getTitle(),
+                                ghIssue.getBody().substring(0, 1024 - link.length()) + link, false);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                embedBuilder.setTitle("~~oops, something went wrong~~ Invalid Repository").setDescription(this.getRepositoryFormatDesc());
+            }
+
         }
 
         return embedBuilder.build();
+    }
+
+    private String getRepositoryFormatDesc() {
+        return """
+                  The repository needs to be in the User/Repository format, or the Organization/Repository format.
+                  **Look at these examples:**
+                  - ThePoultryMan/Crops-Love-Rain
+                  - IrisShaders/Iris""";
     }
 }

@@ -32,11 +32,12 @@ public class GitHubIntegration {
         }
     }
 
-    public GHIssue getIssue(int issueNumber) {
+    public Integer getOpenPrCount(String repository) {
         try {
-            return github.getRepository("ThePoultryMan/Bucket-Hat-Bot").getIssue(issueNumber);
-        } catch (IOException e) {
-            return null;
+            return github.getRepository(repository).getPullRequests(GHIssueState.OPEN).size();
+        } catch (IOException e)
+        {
+            return 0;
         }
     }
 

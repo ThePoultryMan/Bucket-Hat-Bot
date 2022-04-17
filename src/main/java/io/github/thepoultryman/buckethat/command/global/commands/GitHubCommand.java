@@ -50,9 +50,12 @@ public class GitHubCommand extends GlobalCommand {
 
         return new EmbedBuilder().setColor(new Color(0x077EE0)).setAuthor(gitHub.getRepositoryOwner(repository).getLogin() + "/")
                 .setTitle(gitHub.getRepository(repository).getName(), String.valueOf(gitHub.getRepository(repository).getUrl()))
-                .addField("Issues (Open)", gitHub.getOpenIssueCount(repository).toString(), false)
-                .addField("Stars", gitHub.getStarCount(repository).toString(), false)
-                .addField("Watchers", gitHub.getWatcherCount(repository).toString(), false)
+                .addField("Stars", gitHub.getStarCount(repository).toString(), true)
+                .addBlankField(true)
+                .addField("Watchers", gitHub.getWatcherCount(repository).toString(), true)
+                .addField("Pull Requests (Open)", gitHub.getOpenPrCount(repository).toString(), true)
+                .addBlankField(true)
+                .addField("Issues (Open)", gitHub.getOpenIssueCount(repository).toString(), true)
                 .setFooter("Requested by " + requestingName);
     }
 

@@ -28,7 +28,7 @@ public class GuildCommandListener extends ListenerAdapter {
         if (GuildCommandHelper.isBasicCommand(commandName)) {
             event.reply(GuildCommandHelper.getBasicCommandResponse(commandName)).queue();
         } else if (GuildCommandHelper.isBasicEmbedCommand(commandName)) {
-            event.replyEmbeds(GuildCommandHelper.getBasicEmbedCommandResponse(commandName)).queue();
+            event.replyEmbeds(GuildCommandHelper.getBasicEmbedCommandResponse(commandName, event.getUser().getName())).queue();
         } else if (GuildCommandHelper.isEmbedCommand(commandName)) {
             event.replyEmbeds(GuildCommandHelper.getEmbedCommandResponse(commandName)).queue();
         }

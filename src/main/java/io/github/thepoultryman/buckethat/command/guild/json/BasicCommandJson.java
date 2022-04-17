@@ -13,8 +13,9 @@ public class BasicCommandJson {
     // Embed Things
     private final String title;
     private final String color;
+    private final boolean showRequestingUser;
 
-    public BasicCommandJson(String type, String name, String description, String response, String title, String color) {
+    public BasicCommandJson(String type, String name, String description, String response, String title, String color, boolean showRequestingUser) {
         this.type = type;
         this.name = name;
         this.description = description;
@@ -22,6 +23,7 @@ public class BasicCommandJson {
         // Embed Things
         this.title = title;
         this.color = color;
+        this.showRequestingUser = showRequestingUser;
     }
 
     public String getType() {
@@ -65,5 +67,9 @@ public class BasicCommandJson {
     private Color sendColorWarning() {
         BucketHat.LOGGER.warn("An invalid color was set for a basic embed command. Invalid Color: '" + color + "'");
         return new Color(0x077EE0);
+    }
+
+    public boolean isShowingRequestingUser() {
+        return this.showRequestingUser;
     }
 }

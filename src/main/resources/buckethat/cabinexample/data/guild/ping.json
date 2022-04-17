@@ -4,5 +4,6 @@
     "description": "Returns the bot's active ping",
     "response": "Your ping is: ",
     "title": "Pong!",
-    "color": "yellow"
+    "color": "yellow",
+    "showRequestingUser": true
 }

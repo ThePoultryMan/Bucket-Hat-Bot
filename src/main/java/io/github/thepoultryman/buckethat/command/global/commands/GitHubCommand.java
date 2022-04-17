@@ -1,5 +1,6 @@
-package io.github.thepoultryman.buckethat.command.global;
+package io.github.thepoultryman.buckethat.command.global.commands;
 
+import io.github.thepoultryman.buckethat.command.global.GlobalCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 

@@ -1,8 +1,8 @@
 package io.github.thepoultryman.buckethat;
 
 import io.github.thepoultryman.buckethat.command.CommandHelper;
-import io.github.thepoultryman.buckethat.command.global.GitHubCommand;
 import io.github.thepoultryman.buckethat.command.global.GlobalCommandHelper;
+import io.github.thepoultryman.buckethat.command.global.commands.GitHubCommand;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;

@@ -36,26 +36,9 @@ public class GitHubCommand extends GlobalCommand {
                 embedBuilder.setTitle("~~oops, something went wrong~~ Invalid Repository").setDescription(this.getRepositoryFormatDesc());
             }
         } else if (repository != null) {
-            GHRepository ghRepository = BucketHat.gitHub.getRepository(repository);
-            if (ghRepository != null) {
-                try {
-                    GHIssue ghIssue = ghRepository.getIssue(issue);
-
-                    if (ghIssue.getBody().length() <= 1024) {
-                        embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).addField(ghIssue.getTitle(),
-                                ghIssue.getBody(), false);
-                    } else {
-                        String link = "...\n[[Read More]](" + ghIssue.getHtmlUrl() + ")";
-                        embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).addField(ghIssue.getTitle(),
-                                ghIssue.getBody().substring(0, 1024 - link.length()) + link, false);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                embedBuilder.setTitle("~~oops, something went wrong~~ Invalid Repository").setDescription(this.getRepositoryFormatDesc());
-            }
-
+            embedBuilder = this.getEmbedIssueResponse(repository, issue);
+        } else if (issue >= 1) {
+            embedBuilder = this.getEmbedIssueResponse("ThePoultryMan/Bucket-Hat-Bot", issue);
         }
 
         return embedBuilder.build();
@@ -67,5 +50,36 @@ public class GitHubCommand extends GlobalCommand {
                   **Look at these examples:**
                   - ThePoultryMan/Crops-Love-Rain
                   - IrisShaders/Iris""";
+    }
+
+    private EmbedBuilder getEmbedIssueResponse(String repository, Integer issue) {
+        EmbedBuilder embedBuilder = new EmbedBuilder();
+        GHRepository ghRepository = BucketHat.gitHub.getRepository(repository);
+        if (ghRepository != null) {
+            try {
+                GHIssue ghIssue = ghRepository.getIssue(issue);
+
+                if (ghIssue.getBody().length() <= 1024) {
+                    embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).addField(ghIssue.getTitle(),
+                            ghIssue.getBody(), false);
+                } else {
+                    String link = "...\n[[Read More]](" + ghIssue.getHtmlUrl() + ")";
+                    embedBuilder.setTitle(ghRepository.getName() + " Issue #" + issue).addField(ghIssue.getTitle(),
+                            ghIssue.getBody().substring(0, 1024 - link.length()) + link, false);
+                }
+            } catch (IOException e) {
+                return this.getNoIssueFoundEmbed(repository, issue);
+            }
+        } else {
+            embedBuilder.setTitle("~~oops, something went wrong~~ Invalid Repository").setDescription(this.getRepositoryFormatDesc());
+        }
+
+        return embedBuilder;
+    }
+
+    private EmbedBuilder getNoIssueFoundEmbed(String repository, Integer issue) {
+        return new EmbedBuilder().setTitle("#" + issue + " not found in " + repository)
+                .setDescription("Issue #" + issue + " could not be found in " + repository + ". This usually means that there is no" +
+                        " issue #" + issue + ".");
     }
 }

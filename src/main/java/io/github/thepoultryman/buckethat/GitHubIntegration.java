@@ -15,12 +15,27 @@ public class GitHubIntegration {
         return this.github;
     }
 
-    public GHIssue getIssue(int i) {
+    public GHIssue getIssue(int issueNumber) {
         try {
-            return github.getRepository("ThePoultryMan/Bucket-Hat-Bot").getIssue(i);
+            return github.getRepository("ThePoultryMan/Bucket-Hat-Bot").getIssue(issueNumber);
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
+        }
+    }
+
+    public GHIssue getIssue(String repository, int issueNumber) {
+        try {
+            return github.getRepository(repository).getIssue(issueNumber);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public Integer getOpenIssueCount(String repository) {
+        try {
+            return github.getRepository(repository).getOpenIssueCount();
+        } catch (IOException e) {
+            return 0;
         }
     }
 }

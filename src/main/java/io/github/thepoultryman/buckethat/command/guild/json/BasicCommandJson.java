@@ -49,7 +49,7 @@ public class BasicCommandJson {
         return switch (color) {
             case "red" -> new Color(0x850303);
             case "orange" -> new Color(0xD38309);
-            case "yellow" -> new Color(0xC2A507);
+            case "yellow" -> new Color(0xDCBF09);
             case "green" -> new Color(0x3CB40F);
             case "turquoise" -> new Color(0x0CC779);
             case "light_blue" -> new Color(0x09B2DA);

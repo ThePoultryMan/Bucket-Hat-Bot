@@ -1,6 +1,7 @@
 package io.github.thepoultryman.buckethat;
 
 import org.kohsuke.github.GHIssue;
+import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
 
@@ -13,6 +14,17 @@ public class GitHubIntegration {
 
     public GitHub getGithub() {
         return this.github;
+    }
+
+    public GHRepository getRepository(String name) {
+        if (name.split("/").length != 2)
+            return null;
+
+        try {
+            return github.getRepository(name);
+        } catch (IOException e) {
+            return null;
+        }
     }
 
     public GHIssue getIssue(int issueNumber) {

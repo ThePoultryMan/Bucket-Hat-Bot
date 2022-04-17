@@ -11,11 +11,12 @@ public class GlobalCommandListener extends ListenerAdapter {
         String commandName = event.getName();
         if (commandName.equals("github")) {
             String repository = null;
-            int issueNumber = 0;
+            Integer issueNumber = null;
             if (event.getOption("repository") != null)
                 repository = event.getOption("repository").getAsString();
             if (event.getOption("issue") != null)
                 issueNumber = event.getOption("issue").getAsInt();
+
             if (GlobalCommandHelper.getCommand(commandName) instanceof GitHubCommand gitHubCommand)
                 event.replyEmbeds(gitHubCommand.getEmbedResponse(repository, issueNumber)).queue();
         }

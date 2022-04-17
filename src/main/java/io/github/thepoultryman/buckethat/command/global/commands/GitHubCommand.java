@@ -14,8 +14,7 @@ public class GitHubCommand extends GlobalCommand {
         return true;
     }
 
-    @Override
-    public MessageEmbed getEmbedResponse() {
+    public MessageEmbed getEmbedResponse(String repository, int issue) {
         EmbedBuilder messageEmbedBuilder = new EmbedBuilder().setTitle("GitHub");
         return messageEmbedBuilder.build();
     }

@@ -42,15 +42,14 @@ public class GitHubCommand extends GlobalCommand {
             embedBuilder = this.getEmbedIssueResponse(Objects.requireNonNullElse(repository, "ThePoultryMan/Bucket-Hat-Bot"), issue);
         }
 
-
         return embedBuilder.build();
     }
 
     private EmbedBuilder getRepositoryStatsEmbed(String repository, String requestingName) {
         GitHubIntegration gitHub = BucketHat.gitHub;
 
-        return new EmbedBuilder().setTitle(gitHub.getRepository(repository).getName()).setColor(new Color(0x077EE0))
-                .setDescription("*Owned by " + gitHub.getRepositoryOwner(repository).getLogin() + "*")
+        return new EmbedBuilder().setColor(new Color(0x077EE0)).setAuthor(gitHub.getRepositoryOwner(repository).getLogin() + "/")
+                .setTitle(gitHub.getRepository(repository).getName(), String.valueOf(gitHub.getRepository(repository).getUrl()))
                 .addField("Issues (Open)", gitHub.getOpenIssueCount(repository).toString(), false)
                 .addField("Stars", gitHub.getStarCount(repository).toString(), false)
                 .addField("Watchers", gitHub.getWatcherCount(repository).toString(), false)

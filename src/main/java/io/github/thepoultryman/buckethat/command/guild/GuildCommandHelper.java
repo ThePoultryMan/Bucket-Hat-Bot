@@ -86,6 +86,9 @@ public class GuildCommandHelper {
             builder.addField(embedField.getHeader(), embedField.getBody(), false); // TODO: Set inline based on JSON file.
         }
 
+        if (commandJson.getColor() != null)
+            builder.setColor(commandJson.getColor());
+
         return builder.build();
     }
 

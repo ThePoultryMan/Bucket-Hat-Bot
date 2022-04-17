@@ -50,8 +50,8 @@ public class GitHubCommand extends GlobalCommand {
 
         return new EmbedBuilder().setColor(new Color(0x077EE0))
                 .setAuthor(gitHub.getRepositoryOwner(repository).getLogin() + "/",
-                        String.valueOf(gitHub.getRepositoryOwner(repository).getUrl()))
-                .setTitle(gitHub.getRepository(repository).getName(), String.valueOf(gitHub.getRepository(repository).getUrl()))
+                        String.valueOf(gitHub.getRepositoryOwner(repository).getHtmlUrl()))
+                .setTitle(gitHub.getRepository(repository).getName(), String.valueOf(gitHub.getRepository(repository).getHtmlUrl()))
                 .addField("Stars", gitHub.getStarCount(repository).toString(), true)
                 .addBlankField(true)
                 .addField("Watchers", gitHub.getWatcherCount(repository).toString(), true)

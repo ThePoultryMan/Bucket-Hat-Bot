@@ -48,7 +48,9 @@ public class GitHubCommand extends GlobalCommand {
     private EmbedBuilder getRepositoryStatsEmbed(String repository, String requestingName) {
         GitHubIntegration gitHub = BucketHat.gitHub;
 
-        return new EmbedBuilder().setColor(new Color(0x077EE0)).setAuthor(gitHub.getRepositoryOwner(repository).getLogin() + "/")
+        return new EmbedBuilder().setColor(new Color(0x077EE0))
+                .setAuthor(gitHub.getRepositoryOwner(repository).getLogin() + "/",
+                        String.valueOf(gitHub.getRepositoryOwner(repository).getUrl()))
                 .setTitle(gitHub.getRepository(repository).getName(), String.valueOf(gitHub.getRepository(repository).getUrl()))
                 .addField("Stars", gitHub.getStarCount(repository).toString(), true)
                 .addBlankField(true)

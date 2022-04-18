@@ -13,14 +13,14 @@ import org.jetbrains.annotations.NotNull;
 public class BucketHatGlobalStarter extends ListenerAdapter {
     @Override
     public void onReady(@NotNull ReadyEvent event) {
-        GitHubCommand gitHubCommand = new GitHubCommand("github", "Returns the user GitHub stuff");
+        GitHubCommand gitHubCommand = new GitHubCommand("github", "Returns the user GitHub information about a repository or user.");
         gitHubCommand.addSubcommands(new SubcommandData("repo",
                         "Gets repository and issue information. Will default to the Bucket Hat repository.")
                 .addOptions(new OptionData(OptionType.STRING, "repository",
-                        "The repository to look for on GitHub."),
+                        "The repository to look for on GitHub. Should be in the user/repo format (organization/repo)."),
                 new OptionData(OptionType.INTEGER, "issue",
-                        "The issue in a repository that will be retrieved. A repository *must* be specified.")),
-                new SubcommandData("user", "Gets information about the specified user.")
+                        "The issue in a repository that will be retrieved. Defaults to the Bucket Hat Repository.")),
+                new SubcommandData("user", "Gets information about the specified user, or organization.")
                         .addOption(OptionType.STRING, "name", "The name of an user or an organization on GitHub.", true));
 
         GlobalCommandHelper.addCommand(gitHubCommand);

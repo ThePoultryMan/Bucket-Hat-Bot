@@ -6,6 +6,7 @@ import io.github.thepoultryman.buckethat.command.global.GlobalCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.kohsuke.github.GHIssue;
+import org.kohsuke.github.GHOrganization;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHUser;
 
@@ -104,9 +105,15 @@ public class GitHubCommand extends GlobalCommand {
     public MessageEmbed getUserEmbed(String username) {
         EmbedBuilder userEmbedBuilder = new EmbedBuilder();
         GitHubIntegration gitHub = BucketHat.gitHub;
+        GHOrganization organization = BucketHat.gitHub.getOrganization(username);
         GHUser user = BucketHat.gitHub.getUser(username);
 
-        if (user != null) {
+        if (organization != null) {
+            return userEmbedBuilder.setColor(new Color(0x077EE0)).setTitle(username)
+                    .setThumbnail(String.valueOf(organization.getAvatarUrl()))
+                    .addField("Repositories (Public)", gitHub.getOrgPublicRepoCount(organization).toString(), false)
+                    .build();
+        } else if (user != null) {
             return userEmbedBuilder.setColor(new Color(0x077EE0)).setTitle(username)
                     .setThumbnail(String.valueOf(user.getAvatarUrl()))
                     .setDescription(user.getBio())

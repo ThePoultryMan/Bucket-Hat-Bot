@@ -45,6 +45,22 @@ public class GitHubIntegration {
         }
     }
 
+    public GHOrganization getOrganization(String name) {
+        try {
+            return github.getOrganization(name);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public Integer getOrgPublicRepoCount(GHOrganization organization) {
+        try {
+            return organization.getPublicRepoCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
     public GHRepository getRepository(String name) {
         if (name.split("/").length != 2)
             return null;

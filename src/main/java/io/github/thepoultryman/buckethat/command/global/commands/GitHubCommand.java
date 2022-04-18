@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.GHUser;
 
 import java.awt.*;
 import java.io.IOException;
@@ -98,5 +99,24 @@ public class GitHubCommand extends GlobalCommand {
         return new EmbedBuilder().setTitle("#" + issue + " not found in " + repository).setColor(new Color(0xC93508))
                 .setDescription("Issue #" + issue + " could not be found in " + repository + ". This usually means that there is no" +
                         " issue #" + issue + ".");
+    }
+
+    public MessageEmbed getUserEmbed(String username) {
+        EmbedBuilder userEmbedBuilder = new EmbedBuilder();
+        GitHubIntegration gitHub = BucketHat.gitHub;
+        GHUser user = BucketHat.gitHub.getUser(username);
+
+        if (user != null) {
+            return userEmbedBuilder.setColor(new Color(0x077EE0)).setTitle(username)
+                    .setThumbnail(String.valueOf(user.getAvatarUrl()))
+                    .setDescription(user.getBio())
+                    .addField("Repositories (Public)", gitHub.getPublicRepositoryCount(user).toString(), false)
+                    .addField("Following", gitHub.getFollowingCount(user).toString(), false)
+                    .addField("Followers", gitHub.getFollowersCount(user).toString(), false)
+                    .build();
+        } else {
+            return userEmbedBuilder.setColor(new Color(0xD38309)).setTitle("No User Found")
+                    .setDescription("No user with the username '" + username + "' was found on GitHub").build();
+        }
     }
 }

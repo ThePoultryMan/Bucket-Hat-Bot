@@ -46,12 +46,15 @@ public class GuildCommandHelper {
      * @return A {@link MessageEmbed} that contains a single field and
      * a footer.
      */
-    public static MessageEmbed getBasicEmbedCommandResponse(String commandName) {
+    public static MessageEmbed getBasicEmbedCommandResponse(String commandName, String requestingName) {
         BasicCommandJson commandJson = basicEmbedCommandMap.get(commandName);
+        EmbedBuilder builder = new EmbedBuilder().setTitle(commandJson.getTitle()).setColor(commandJson.getColor())
+                .setDescription(commandJson.getResponse());
 
-        return new EmbedBuilder().setTitle(commandJson.getTitle())
-                .addField("", commandJson.getResponse(), false)
-                .setFooter("Bucket Hat").build();
+        if (commandJson.isShowingRequestingUser())
+            builder.setFooter("Requested by" + requestingName);
+
+        return builder.build();
     }
 
     public static boolean isBasicEmbedCommand(String commandName) {
@@ -86,6 +89,9 @@ public class GuildCommandHelper {
             EmbedCommandJson.EmbedField embedField = commandJson.getFields().get(i);
             builder.addField(embedField.getHeader(), embedField.getBody(), false); // TODO: Set inline based on JSON file.
         }
+
+        if (commandJson.getColor() != null)
+            builder.setColor(commandJson.getColor());
 
         return builder.build();
     }

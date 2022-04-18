@@ -15,5 +15,6 @@
             "header": "Lanterns Belong on Walls",
             "body": "Allows the player to place lanterns on walls."
         }
-    ]
+    ],
+    "color": "blue"
 }

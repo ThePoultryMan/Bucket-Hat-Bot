@@ -13,6 +13,38 @@ public class GitHubIntegration {
         return this.github;
     }
 
+    public GHUser getUser(String username) {
+        try {
+            return github.getUser(username);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public Integer getPublicRepositoryCount(GHUser user) {
+        try {
+            return user.getPublicRepoCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    public Integer getFollowingCount(GHUser user) {
+        try {
+            return user.getFollowingCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    public Integer getFollowersCount(GHUser user) {
+        try {
+            return user.getFollowersCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
     public GHRepository getRepository(String name) {
         if (name.split("/").length != 2)
             return null;

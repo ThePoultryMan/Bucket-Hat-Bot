@@ -6,7 +6,9 @@ import io.github.thepoultryman.buckethat.command.global.GlobalCommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.kohsuke.github.GHIssue;
+import org.kohsuke.github.GHOrganization;
 import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.GHUser;
 
 import java.awt.*;
 import java.io.IOException;
@@ -42,18 +44,22 @@ public class GitHubCommand extends GlobalCommand {
             embedBuilder = this.getEmbedIssueResponse(Objects.requireNonNullElse(repository, "ThePoultryMan/Bucket-Hat-Bot"), issue);
         }
 
-
         return embedBuilder.build();
     }
 
     private EmbedBuilder getRepositoryStatsEmbed(String repository, String requestingName) {
         GitHubIntegration gitHub = BucketHat.gitHub;
 
-        return new EmbedBuilder().setTitle(gitHub.getRepository(repository).getName()).setColor(new Color(0x077EE0))
-                .setDescription("*Owned by " + gitHub.getRepositoryOwner(repository).getLogin() + "*")
-                .addField("Issues (Open)", gitHub.getOpenIssueCount(repository).toString(), false)
-                .addField("Stars", gitHub.getStarCount(repository).toString(), false)
-                .addField("Watchers", gitHub.getWatcherCount(repository).toString(), false)
+        return new EmbedBuilder().setColor(new Color(0x077EE0))
+                .setAuthor(gitHub.getRepositoryOwner(repository).getLogin() + "/",
+                        String.valueOf(gitHub.getRepositoryOwner(repository).getHtmlUrl()))
+                .setTitle(gitHub.getRepository(repository).getName(), String.valueOf(gitHub.getRepository(repository).getHtmlUrl()))
+                .addField("Stars", gitHub.getStarCount(repository).toString(), true)
+                .addBlankField(true)
+                .addField("Watchers", gitHub.getWatcherCount(repository).toString(), true)
+                .addField("Pull Requests (Open)", gitHub.getOpenPrCount(repository).toString(), true)
+                .addBlankField(true)
+                .addField("Issues (Open)", gitHub.getOpenIssueCount(repository).toString(), true)
                 .setFooter("Requested by " + requestingName);
     }
 
@@ -94,5 +100,30 @@ public class GitHubCommand extends GlobalCommand {
         return new EmbedBuilder().setTitle("#" + issue + " not found in " + repository).setColor(new Color(0xC93508))
                 .setDescription("Issue #" + issue + " could not be found in " + repository + ". This usually means that there is no" +
                         " issue #" + issue + ".");
+    }
+
+    public MessageEmbed getUserEmbed(String username) {
+        EmbedBuilder userEmbedBuilder = new EmbedBuilder();
+        GitHubIntegration gitHub = BucketHat.gitHub;
+        GHOrganization organization = BucketHat.gitHub.getOrganization(username);
+        GHUser user = BucketHat.gitHub.getUser(username);
+
+        if (organization != null) {
+            return userEmbedBuilder.setColor(new Color(0x077EE0)).setTitle(username)
+                    .setThumbnail(String.valueOf(organization.getAvatarUrl()))
+                    .addField("Repositories (Public)", gitHub.getOrgPublicRepoCount(organization).toString(), false)
+                    .build();
+        } else if (user != null) {
+            return userEmbedBuilder.setColor(new Color(0x077EE0)).setTitle(username)
+                    .setThumbnail(String.valueOf(user.getAvatarUrl()))
+                    .setDescription(user.getBio())
+                    .addField("Repositories (Public)", gitHub.getPublicRepositoryCount(user).toString(), false)
+                    .addField("Following", gitHub.getFollowingCount(user).toString(), false)
+                    .addField("Followers", gitHub.getFollowersCount(user).toString(), false)
+                    .build();
+        } else {
+            return userEmbedBuilder.setColor(new Color(0xD38309)).setTitle("No User Found")
+                    .setDescription("No user with the username '" + username + "' was found on GitHub").build();
+        }
     }
 }

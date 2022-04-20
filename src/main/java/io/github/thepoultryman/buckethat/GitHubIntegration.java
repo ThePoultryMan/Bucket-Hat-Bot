@@ -13,6 +13,54 @@ public class GitHubIntegration {
         return this.github;
     }
 
+    public GHUser getUser(String username) {
+        try {
+            return github.getUser(username);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public Integer getPublicRepositoryCount(GHUser user) {
+        try {
+            return user.getPublicRepoCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    public Integer getFollowingCount(GHUser user) {
+        try {
+            return user.getFollowingCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    public Integer getFollowersCount(GHUser user) {
+        try {
+            return user.getFollowersCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    public GHOrganization getOrganization(String name) {
+        try {
+            return github.getOrganization(name);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public Integer getOrgPublicRepoCount(GHOrganization organization) {
+        try {
+            return organization.getPublicRepoCount();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
     public GHRepository getRepository(String name) {
         if (name.split("/").length != 2)
             return null;
@@ -32,11 +80,12 @@ public class GitHubIntegration {
         }
     }
 
-    public GHIssue getIssue(int issueNumber) {
+    public Integer getOpenPrCount(String repository) {
         try {
-            return github.getRepository("ThePoultryMan/Bucket-Hat-Bot").getIssue(issueNumber);
-        } catch (IOException e) {
-            return null;
+            return github.getRepository(repository).getPullRequests(GHIssueState.OPEN).size();
+        } catch (IOException e)
+        {
+            return 0;
         }
     }
 
@@ -66,7 +115,7 @@ public class GitHubIntegration {
 
     public Integer getWatcherCount(String repository) {
         try {
-            return github.getRepository(repository).getWatchersCount();
+            return github.getRepository(repository).getSubscribersCount();
         } catch (IOException e) {
             return 0;
         }

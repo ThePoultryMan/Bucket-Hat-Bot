@@ -1,22 +1,25 @@
 package io.github.thepoultryman.buckethat.command.global;
 
+import io.github.thepoultryman.buckethat.BucketHat;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 public class GlobalCommandManager {
-    private final JDA jda;
+    private static final JDA JDA = BucketHat.getJda();
+    private static final Collection<SlashCommandData> commands = new HashSet<>();
 
-    public GlobalCommandManager(JDA jda) {
-        this.jda = jda;
+    public static void addGlobalCommand(SlashCommandData command) {
+        commands.add(command);
     }
 
-    public void addAllCommands(Collection<SlashCommandData> commands) {
-        jda.updateCommands().addCommands(commands).queue();
+    public static Collection<SlashCommandData> getGlobalCommands() {
+        return commands;
     }
 
-    public void clearAllCommands() {
-        jda.updateCommands().queue();
+    public static void createGlobalCommands() {
+        JDA.updateCommands().addCommands(commands).queue();
     }
 }

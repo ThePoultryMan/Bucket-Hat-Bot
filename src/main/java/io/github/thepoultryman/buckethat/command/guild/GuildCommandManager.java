@@ -10,43 +10,18 @@ import java.util.HashSet;
 
 public class GuildCommandManager {
     private final Logger BH_LOGGER = BucketHat.LOGGER;
-    private final Guild guild;
-    Collection<SlashCommandData> commands = new HashSet<>();
+    private static final Guild guild = BucketHat.getJda().getGuildById(BucketHat.DOTENV.get("GUILD_ID"));
+    private static final Collection<SlashCommandData> commands = new HashSet<>();
 
-    public GuildCommandManager(Guild guild) {
-        this.guild = guild;
+    public static void addGuildCommand(SlashCommandData command) {
+        commands.add(command);
     }
 
-    /**
-     * <p>Adds the existing (slash) commands retrieved from Discord back
-     * into the command collection, so they are not discarded when this
-     * method is run.</p>
-     * <p>If someone wants to remove a command from the retrieval list,
-     * you should call {@link }</p>
-     */
-    public void addAllCommands() {
+    public static Collection<SlashCommandData> getGuildCommands() {
+        return commands;
+    }
+
+    public static void createGuildCommands() {
         guild.updateCommands().addCommands(commands).queue();
-    }
-
-    /**
-     * <p>Adds the existing (slash) commands retrieved from Discord back
-     * into the command collection, so they are not discarded when this
-     * method is run.</p>
-     * <p>If someone wants to remove a command from the retrieval list,
-     * you should call {@link }</p>
-     */
-    public void addAllCommands(Collection<SlashCommandData> commands) {
-        guild.updateCommands().addCommands(commands).queue();
-    }
-
-    /**
-     * <p><b>Permanently</b> deletes all of the guild commands the have
-     * been created. The only way of getting the commands back is to
-     * recreate them again.</p>
-     * <p>This should only be run if it is needed, or for testing purposes.</p>
-     */
-    public void clearAllCommands() {
-        commands.clear();
-        guild.updateCommands().queue();
     }
 }

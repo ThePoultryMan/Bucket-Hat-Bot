@@ -1,9 +1,0 @@
-{
-    "type": "basic-embed",
-    "name": "ping",
-    "description": "Returns the bot's active ping",
-    "response": "Your ping is: ",
-    "title": "Pong!",
-    "color": "yellow",
-    "showRequestingUser": true
-}
